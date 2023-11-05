@@ -8,13 +8,14 @@ import cv2
 import face_recognition
 from flask import Flask, render_template, jsonify, request, redirect, session
 import base64
+import requests
 
 data_flow = []
 flag = 0
 final_data = ["", "", "", "", ""]
 
 data_dict = {
-    0: ["neel", "10’10”", "170 lbs", "Ligma", "Ligma"],
+    0: ["neel", "10’10”", "170 lbs", "Flu", "5 mgs of Tylenol"],
     1: ["ariana", "5’5”", "160 lbs", "Congenital Heart Disease", "20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil"],
     2: ["victor", "5’5”", "150 lbs", "Fever", "5 mgs Hydroxychloroquine, 10 mgs Prednisone, 50 mgs Ibuprofen"],
     3: ["jawad", "6’0”", "210 lbs", "ADHD", "5 mgs Adderall twice a day"]
@@ -50,12 +51,19 @@ def index():
 def patient():
     return render_template('index.html', data=data_dict)
 
-@app.route('/capture')
+@app.route('/capture', methods=['GET', 'POST'])
 def capture():
+    question = ""
+    if request.method == 'POST':
+        question = request.form.get('question')
+        response = requests.get("https://api.wolframalpha.com/v1/conversation.jsp?appid=K8YU32-U3RHXRTJ78&i="+question)
+        return f'<script>alert("{response}"); window.location = "/capture";</script>'
+
     if flag == 0:
-        return render_template("capture.html", values=final_data)
+        return render_template("capture.html", values=final_data, question=question)
     else:
-        return render_template("capture.html", values=final_data)
+        return render_template("capture.html", values=final_data, question=question)
+
 
 @app.route('/save_photo', methods=['POST'])
 def save_photo():
