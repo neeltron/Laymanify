@@ -13,7 +13,6 @@ data_flow = []
 flag = 0
 final_data = ["", "", "", "", ""]
 
-# Your dictionary
 data_dict = {
     0: ["neel", "10’10”", "170 lbs", "Ligma", "Ligma"],
     1: ["ariana", "5’5”", "160 lbs", "Congenital Heart Disease", "20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil"],
@@ -45,6 +44,10 @@ app.secret_key = 'testlol'
 
 @app.route('/')
 def index():
+    return render_template('homepage.html')
+
+@app.route('/patient')
+def patient():
     return render_template('index.html', data=data_dict)
 
 @app.route('/capture')
