@@ -9,6 +9,7 @@ import face_recognition
 from flask import Flask, render_template, jsonify, request, redirect, session
 import base64
 import requests
+import json
 
 data_flow = []
 flag = 0
@@ -57,7 +58,9 @@ def capture():
     if request.method == 'POST':
         question = request.form.get('question')
         response = requests.get("https://api.wolframalpha.com/v1/conversation.jsp?appid=K8YU32-U3RHXRTJ78&i="+question)
-        return f'<script>alert("{response}"); window.location = "/capture";</script>'
+        res = response.json()["result"].replace('"', '')
+        print(res)
+        return f'<script>alert("{res}"); window.location = "/capture";</script>'
 
     if flag == 0:
         return render_template("capture.html", values=final_data, question=question)
