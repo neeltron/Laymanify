@@ -12,28 +12,36 @@
 </header>
 <body>
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-        <video style="width: 60%;" id="camera" autoplay></video>
-        <button style="margin-top: 10px;" id="captureButton">Capture Photo</button>
-      </div>
-      
-   <div style="width: 100%; padding-bottom: .5rem; height: auto; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; margin-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient {{ values[0] }}</div>
-
-    <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
-        <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="static/{{values[0]}}.jpg" />
-
-        <div style="padding: .5rem;  box-shadow: gainsboro 2px 2px 2px; margin-left: 2rem; border-radius: 6px; border: 1px black solid; flex: 0.5;">
-
-            <div style="width: 100%; height: 100%"><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Name: {{ values[0] }}<br/>Height: {{ values[1] }}<br/>Weight: {{ values[2] }}<br/>Condition: {{ values[3] }}<br/>Medication(s): {{ values[4] }}</span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 600; word-wrap: break-word">, </span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">...</span></div>
-
+        <div style="background-color: #4C92C6; border-radius: 10px; width: 60%; overflow: hidden;">
+            <video style="width: 100%; border-radius: 10px;" id="camera" autoplay></video>
         </div>
+        <button style="margin-top: 10px; background-color: #4C92C6; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 18px; cursor: pointer;" id="captureButton">Capture Photo</button>
     </div>
-    
-    <form method="post">
-        <div style=" display: flex; flex-direction: row; align-items: flex-start; margin-top: 3rem; margin-left: 6rem;">
-            <input type="text" name="question" id="question" placeholder="Ask a question">
-            <button type="submit" id="askButton">Ask</button>
+      
+   <div style="margin: 2rem 6rem; text-align: center;">
+        <div style="font-size: 20px; font-family: Karma; font-weight: 600; color: #00489C;">Patient {{ values[0] }}</div>
+        <div style="display: flex; margin-top: 1rem;">
+            <div style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;">
+                <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" src="static/{{values[0]}}.jpg" />
+            </div>
+            <div style="flex: 1; margin-left: 2rem; background-color: white; padding: 1rem; border-radius: 6px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
+                <div style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; margin-bottom: 1rem;">
+                    Name: {{ values[0] }}<br>
+                    Height: {{ values[1] }}<br>
+                    Weight: {{ values[2] }}<br>
+                    Condition: {{ values[3] }}<br>
+                    Medication(s): {{ values[4] }}
+                </div>
+            </div>
         </div>
-    </form>
+
+        <form method="post" style="margin-top: 2rem;">
+            <div style="display: flex; align-items: flex-start;">
+                <input type="text" name="question" id="question" placeholder="Ask a question" style="flex: 1; padding: 10px; border: 1px solid #4C92C6; border-radius: 5px;">
+                <button type="submit" id="askButton" style="background-color: #4C92C6; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 18px; cursor: pointer;">Ask</button>
+            </div>
+        </form>
+    </div>
 
     <script>
         const cameraView = document.getElementById('camera');
