@@ -1,20 +1,79 @@
 <!DOCTYPE html>
 <html>
-
 <header style="margin-bottom: 3rem;">
-
     <a href="homepage.html">   <img style="width: 10rem; height: 6rem" src="static/67664b099222397542bc51f78f3b0ad3-2.png" /> </a> 
-
     <div style="width: 70%; height: 100%; float: right; border-bottom: 1px #00489C solid; display: flex; margin-right: 1rem; padding-top: 4.25rem; justify-content: space-around">
-
         <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">About Us</div>
-       <a href="index.html">     <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Patient Files</div></a>
+        <a href="index.html">     <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Patient Files</div></a>
         <a href="capture.html">     <div style=" color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Capture</div></a>
         <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Reminders</div>
         <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Login</div>
-           
-       </div>
+    </div>
+</header>
+<body>
+    <div>
+        <video id="camera" autoplay></video>
+        <button id="captureButton">Capture Photo</button>
+    </div>
 
-   </header>
+    <!-- Add a div to display the data_dict -->
+    <div id="dataDiv"></div>
 
-<div></div>
+    <script>
+        const cameraView = document.getElementById('camera');
+        const captureButton = document.getElementById('captureButton');
+        const dataDiv = document.getElementById('dataDiv');
+
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraView.srcObject = stream;
+            } catch (err) {
+                console.error('Error accessing the camera:', err);
+            }
+        }
+
+        captureButton.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = cameraView.videoWidth;
+            canvas.height = cameraView.videoHeight;
+            canvas.getContext('2d').drawImage(cameraView, 0, 0, cameraView.videoWidth, cameraView.videoHeight);
+
+            const photo = canvas.toDataURL('image/jpeg');
+
+            fetch('/save_photo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ photoData: photo }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.fileName) {
+                        console.log('Photo saved:', data.fileName);
+
+                        // Make an additional request to retrieve data_dict
+                        fetch('/result')
+                            .then(response => response.json())
+                            .then(data => {
+                                // Update the dataDiv with the retrieved data
+                                dataDiv.innerHTML = JSON.stringify(data, null, 2);
+                            })
+                            .catch(error => {
+                                console.error('Error retrieving data_dict:', error);
+                            });
+                    } else {
+                        console.error('Error saving photo:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving photo:', error);
+                });
+        });
+
+        // Initialize the camera when the page loads
+        window.addEventListener('load', initCamera);
+    </script>
+</body>
+</html>
