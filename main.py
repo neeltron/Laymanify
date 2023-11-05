@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov  4 16:21:20 2023
-
+Created on Sat Nov 4 16:21:20 2023
 @author: neeltron
 """
 
 import cv2
 import face_recognition
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, render_template, jsonify, request, redirect, session
 import base64
 
 data_flow = []
+flag = 0
+final_data = ["", "", "", "", ""]
 
 # Your dictionary
 data_dict = {
-    0: ["neel", "5’10”", "170 lbs", "Ligma", "Ligma"],
-    1: ["b", "5’5”", "160 lbs", "Congenital Heart Disease", "20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil"],
-    2: ["c", "5’3”", "150 lbs", "Lupus", "5 mgs Hydroxychloroquine, 10 mgs Prednisone, 50 mgs Ibuprofen"],
-    3: ["d", "6’0”", "210 lbs", "ADHD", "5 mgs Adderall twice a day"]
+    0: ["neel", "10’10”", "170 lbs", "Ligma", "Ligma"],
+    1: ["ariana", "5’5”", "160 lbs", "Congenital Heart Disease", "20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil"],
+    2: ["victor", "5’5”", "150 lbs", "Fever", "5 mgs Hydroxychloroquine, 10 mgs Prednisone, 50 mgs Ibuprofen"],
+    3: ["jawad", "6’0”", "210 lbs", "ADHD", "5 mgs Adderall twice a day"]
 }
 
 def recognize(ref, test):
@@ -40,6 +41,7 @@ def recognize(ref, test):
     return result[0]
 
 app = Flask('app', static_folder='static', template_folder='templates')
+app.secret_key = 'testlmao'
 
 @app.route('/')
 def index():
@@ -47,11 +49,22 @@ def index():
 
 @app.route('/capture')
 def capture():
-    return render_template("capture.html")
+    if 'final_data' in session:
+        values = session['final_data']
+    else:
+        values = ['', '', '', '', '']
+    
+    if flag == 0:
+        return render_template("capture.html", values=values)
+    else:
+        return render_template("capture.html", values=values)
 
 @app.route('/save_photo', methods=['POST'])
 def save_photo():
     try:
+        global final_data, flag
+        flag = 1
+        final_data = ["", "", "", "", ""]
         data = request.get_json()
         photo_data = data.get('photoData')
 
@@ -59,35 +72,26 @@ def save_photo():
 
         with open(file_name, 'wb') as f:
             f.write(base64.b64decode(photo_data.split(',')[1]))
-            
-        ref_image = 'test.jpg'
 
-        results = {}
+        ref_image = 'test.jpg'
         for key, values in data_dict.items():
             name, _, _, _, _ = values
             test_image = f'{name}.jpg'
             result = recognize(ref_image, test_image)
-            results[name] = result
-            
+
             if result == True:
                 data_flow.append(name)
+                for i in data_dict:
+                    if data_dict[i][0] == data_flow[0]:
+                        final_data = data_dict[i]
+                        session['final_data'] = final_data
+                        break
                 break
-            
-        return name
+
+        return render_template('capture.html', values=final_data)
 
     except Exception as e:
-        return jsonify({'error': str(e)})
-    
-@app.route('/result')
-def result():
-    for i in data_dict:
-        if data_dict[i][0] == data_flow[0]:
-            print(data_dict[i])
-            break
-            
-    return jsonify(data_dict[i])
-
+        return render_template('capture.html', values=final_data)
 
 if __name__ == '__main__':
     app.run(ssl_context='adhoc', host='0.0.0.0', port=8080)
-
