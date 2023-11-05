@@ -41,7 +41,7 @@ def recognize(ref, test):
     return result[0]
 
 app = Flask('app', static_folder='static', template_folder='templates')
-app.secret_key = 'testlmao'
+app.secret_key = 'testlol'
 
 @app.route('/')
 def index():
@@ -49,15 +49,10 @@ def index():
 
 @app.route('/capture')
 def capture():
-    if 'final_data' in session:
-        values = session['final_data']
-    else:
-        values = ['', '', '', '', '']
-    
     if flag == 0:
-        return render_template("capture.html", values=values)
+        return render_template("capture.html", values=final_data)
     else:
-        return render_template("capture.html", values=values)
+        return render_template("capture.html", values=final_data)
 
 @app.route('/save_photo', methods=['POST'])
 def save_photo():
@@ -80,12 +75,8 @@ def save_photo():
             result = recognize(ref_image, test_image)
 
             if result == True:
+                final_data = data_dict[key]
                 data_flow.append(name)
-                for i in data_dict:
-                    if data_dict[i][0] == data_flow[0]:
-                        final_data = data_dict[i]
-                        session['final_data'] = final_data
-                        break
                 break
 
         return render_template('capture.html', values=final_data)
