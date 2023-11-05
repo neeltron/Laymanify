@@ -1,65 +1,16 @@
 <!DOCTYPE html>
 <html>
-
-
+<header style="margin-bottom: 3rem;">
+    <a href="homepage.html">   <img style="width: 10rem; height: 6rem" src="static/67664b099222397542bc51f78f3b0ad3-2.png" /> </a> 
+    <div style="width: 70%; height: 100%; float: right; border-bottom: 1px #00489C solid; display: flex; margin-right: 1rem; padding-top: 4.25rem; justify-content: space-around">
+        <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">About Us</div>
+        <a href="/patient">     <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Patient Files</div></a>
+        <a href="/capture">     <div style=" color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Capture</div></a>
+        <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Reminders</div>
+        <div style="color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Login</div>
+    </div>
+</header>
 <body>
-    
-    <head>
-    <style>
-    /* Add flexbox to the navbar */
-    header {
-      display: flex;
-      justify-content: center;
-      margin: 0 8rem;
-    }
-    
-    /* Add flex items to the navbar */
-    header .logo,
-    header .nav-links,
-    header .search-tool {
-      flex: 1;
-    }
-    
-    /* Center the logo and navigation links horizontally */
-    header .logo,
-    header .nav-links {
-      align-items: center;
-    }
-    
-    /* Add a margin to the search tool */
-    header .search-tool {
-      margin-left: 1rem;
-    }
-    
-    /* Add a border to the search tool */
-    header .search-tool input {
-      border: 1px solid #000;
-      padding: 0.5rem;
-    }
-    </style>
-    </head>
-    
-    <body>
-          
-      <header>
-        <a href="/templates/homepage.html" class="logo">
-          <img src="static/67664b099222397542bc51f78f3b0ad3-2.png" alt="Logo" />
-        </a>
-    
-        <nav class="nav-links">
-          <a href="/templates/index.html">Patient Files</a>
-          <a href="/templates/capture.html">Capture</a>
-          <a href="#">Reminders</a>
-          <a href="#">Login</a>
-        </nav>
-    
-        <input type="search" class="search-tool" placeholder="Search..." />
-      </header>
-    
-   
-    </body>
-    </html>
-     
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
         <div style="background-color: #4C92C6; border-radius: 10px; width: 40%; overflow: hidden;">
             <video style="width: 100%; border-radius: 10px;" id="camera" autoplay></video>
