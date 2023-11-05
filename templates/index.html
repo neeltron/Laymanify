@@ -5,81 +5,39 @@
 
     <header style="margin-bottom: 3rem;">
 
-     <a href="homepage.html">   <img style="width: 10rem; height: 6rem" src="images/67664b099222397542bc51f78f3b0ad3-2.png" /> </a> 
+        <a href="homepage.html"><img style="width: 10rem; height: 6rem" src="images/67664b099222397542bc51f78f3b0ad3-2.png" /></a>
 
         <div style="width: 70%; height: 100%; float: right; border-bottom: 1px #00489C solid; display: flex; margin-right: 1rem; padding-top: 4.25rem;">
 
             <div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">About Us</div>
-            <a href="index.html">     <div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; margin-right: 7rem; font-family: Karma; font-weight: 300; word-wrap: break-word">Patient Files</div></a>
-            <a href="capture.html">     <div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; font-family: Karma; margin-right: 5rem; font-weight: 300; word-wrap: break-word">Capture</div></a>
+            <a href="index.html"><div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; margin-right: 7rem; font-family: Karma; font-weight: 300; word-wrap: break-word">Patient Files</div></a>
+            <a href="capture.html"><div style="width: 100%; height; 100%; color: #00489C; font-size: 14px; font-family: Karma; margin-right: 5rem; font-weight: 300; word-wrap: break-word">Capture</div></a>
             <div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Reminders</div>
             <div style="width: 100%; height: 100%; color: #00489C; font-size: 14px; font-family: Karma; font-weight: 300; word-wrap: break-word">Login</div>
-            
+
         </div>
 
     </header>
 
-        <div style="width: 30%; height: 90%; text-shadow: 1px 1px 1px; border: .25px #ffffff solid;">
+    <div style="width: 30%; height: 90%; text-shadow: 1px 1px 1px; border: .25px #ffffff solid;">
 
-            <div style="width: 100%; height: 100%; text-align: left; margin-left: 6rem; color: black; font-size: 22px; font-family: Karma; font-weight: 200; word-wrap: break-word">   Patient Files</div>
+        <div style="width: 100%; height: 100%; text-align: left; margin-left: 6rem; color: black; font-size: 22px; font-family: Karma; font-weight: 200; word-wrap: break-word">Patient Files</div>
+
+    </div>
+
+    {% for key, values in data.items() %}
+    <div style="width: 100%; padding-bottom: .5rem; height: auto; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; padding-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient {{ values[0] }}</div>
+
+    <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
+        <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="images/566-5668461_user-white-person-icon-clipart-4207004901 1.png" />
+
+        <div style="padding: .5rem;  box-shadow: gainsboro 2px 2px 2px; margin-left: 2rem; border-radius: 6px; border: 1px black solid; flex: 0.5;">
+
+            <div style="width: 100%; height: 100%"><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Name: {{ values[0] }}<br/>Height: {{ values[1] }}<br/>Weight: {{ values[2] }}<br/>Condition: {{ values[3] }}<br/>Medication(s): {{ values[4] }}</span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 600; word-wrap: break-word">, </span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">...</span></div>
 
         </div>
+    </div>
+    {% endfor %}
 
-        <div
-
-        style="width: 100%; padding-bottom: .5rem; height: auto; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; padding-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient A</div>
-
-        <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
-            <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="images/566-5668461_user-white-person-icon-clipart-4207004901 1.png" />
-        
-            <div style="padding: .5rem;  box-shadow: gainsboro 2px 2px 2px; margin-left: 2rem; border-radius: 6px; border: 1px black solid; flex: 0.5;">
-                
-                <div style="width: 100%; height: 100%"><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Age: 35<br/>Height: 5’5”<br/>Weight: 160<br/>Condition: Congenital Heart Disease<br/>Medication(s): 20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil</span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 600; word-wrap: break-word">, </span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">...</span></div>
-            
-            </div>
-        </div>    
-
-        <div
-
-        style="width: 100%; padding-bottom: .5rem; height: auto; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; padding-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient B</div>
-
-        <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
-            <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="images/566-5668461_user-white-person-icon-clipart-4207004901 1.png" />
-        
-            <div style="padding: .5rem; margin-left: 2rem;  box-shadow: gainsboro 2px 2px 2px; border-radius: 6px; border: 1px black solid; flex: 0.5;">
-            
-                <div style="width: 100%; height: 100%"><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Age: 16 <br/>Height: 5’3”<br/>Weight: 150 <br/>Condition: Lupus<br/>Medication(s): 5 mgs Hydroxychloroquine, 10 mgs Prednisone, 50 mgs Ibuprofen, ...</span></div>
-          
-            </div>
-        </div>    
-
-        <div
-
-        style="width: 100%; height: 100%; padding-bottom: .5rem; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; padding-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient C</div>
-
-        <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
-            <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="images/566-5668461_user-white-person-icon-clipart-4207004901 1.png" />
-        
-            <div style="padding: .5rem; margin-left: 2rem;  box-shadow: gainsboro 2px 2px 2px; border-radius: 6px; border: 1px black solid; flex: 0.5;">
-            
-                <div style="width: 100%; height: 100%; color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Age: 20 <br/>Height: 6”0”<br/>Weight: 210 <br/>Condition: ADHD<br/>Medication(s): 5 mgs adderall twice per day </div>
-            
-            </div>
-        </div>    
-
-        <div
-
-        style="width: 100%; height: 100%; padding-bottom: .5rem; text-align: left; color: black; font-size: 16px; font-family: Karma; font-weight: 300; padding-top: 3rem; margin-left: 6rem; word-wrap: break-word">Patient D</div>
-
-        <div style="width: 100%; height: 150px; margin-left: 6rem; display: flex; gap: 1rem">
-            <img style="width: 130px; height: 100%; background-color: #4C92C6; border-radius: 6px;" src="images/566-5668461_user-white-person-icon-clipart-4207004901 1.png" />
-        
-            <div style="padding: .5rem; margin-left: 2rem; box-shadow: gainsboro 2px 2px 2px; border-radius: 6px; border: 1px black solid; flex: 0.5;">
-            
-                <div style="width: 100%; height: 100%"><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 300; word-wrap: break-word">Age: 65<br/>Height: 5’10”<br/>Weight: 115<br/>Condition: Malnutrition<br/>Medication(s): 10 mgs Megestrol, 5 mgs Oxandrolone,</span><span style="color: black; font-size: 20px; font-family: Karma; font-weight: 600; word-wrap: break-word"> ...</span></div>
-
-            </div>
-        </div>    
-
-    </body>
-   </html>
+</body>
+</html>

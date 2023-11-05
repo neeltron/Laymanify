@@ -10,6 +10,11 @@ import numpy as np
 import face_recognition
 from flask import Flask, render_template
 
+dict = {0: ["neel", "5’10”", "170 lbs", "Ligma", "Ligma"],
+        1: ["b", "5’5”", "160 lbs", "Congenital Heart Disease", "20 mgs Lisinoprol, 10 mgs Mannitol, 15 mgs Aprostadil"],
+        2: ["c", "5’3”", "150 lbs", "Lupus", "5 mgs Hydroxychloroquine, 10 mgs Prednisone, 50 mgs Ibuprofen"],
+        3: ["d", "6’0”", "210 lbs", "ADHD", "5 mgs Adderall twice a day"]
+        }
 
 def recognize(ref, test):
     ref = face_recognition.load_image_file('static/'+ref)
@@ -39,6 +44,6 @@ app = Flask('app', static_folder='static', template_folder='templates')
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('index.html', data = dict)
 
 app.run(host='0.0.0.0', port=8080)
