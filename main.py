@@ -46,4 +46,8 @@ app = Flask('app', static_folder='static', template_folder='templates')
 def index():
   return render_template('index.html', data = dict)
 
+@app.route('/capture')
+def capture():
+    return render_template("capture.html")
+
 app.run(host='0.0.0.0', port=8080)
